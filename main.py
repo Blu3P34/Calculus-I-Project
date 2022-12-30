@@ -6,7 +6,7 @@ class introduction(Scene):
         intro2 = Text("The application of Calculus I")
         self.play(Create(intro1), run_time = 2)
         self.play(ReplacementTransform(intro1,intro2))
-        self.wait(2)
+        self.play(FadeOut(intro2), run_time = 2)
 
 class abstraction1(Scene):
     def construct(self):
@@ -15,15 +15,18 @@ class abstraction1(Scene):
         deriv = Text("Derivatives").shift(UP)
         intgr = Text("Integrals")
         diffeq = Text("Differential equations").shift(DOWN)
-
+        framebox1 = SurroundingRectangle(deriv, buff = 0.1)
+        framebox2 = SurroundingRectangle(intgr, buff = 0.1)
+        framebox3 = SurroundingRectangle(diffeq, buff = 0.1)
         self.play(Create(abstr), run_time = 1)
-        self.wait(2)
-        self.play(ReplacementTransform(abstr,calc1), run_time = 0.5)
         self.wait(1)
-        self.play(ReplacementTransform(calc1,deriv), run_time = 1)
-        self.play(Create(intgr), run_time = 1)
-        self.play(Create(diffeq), run_time = 1)
-        self.wait(1)
+        self.play(ReplacementTransform(abstr,calc1), run_time = 1)
+        self.wait(3)
+        self.play(ReplacementTransform(calc1,deriv), Create(framebox1), run_time = 2)
+        self.play(Create(intgr), ReplacementTransform(framebox1, framebox2), run_time = 2)
+        self.play(Create(diffeq), ReplacementTransform(framebox2, framebox3), run_time = 2)
+        self.play(Uncreate(framebox3), run_time = 1)
+        self.wait(6)
 
 class abstraction2(ThreeDScene):
     def construct(self):
@@ -38,6 +41,9 @@ class abstraction2(ThreeDScene):
         )
         text1 = Text("Volumn \nSurface area ")
         text2 = Text("?", font_size = 96)
+        text3 = Text("Issac Newton      Gottfried Leibniz").shift(2*DOWN)
+        img = ImageMobject("assets/Newton-Leibniz.jpg").scale(2).next_to(text3, UP)
+
         self.set_camera_orientation(phi=75 * DEGREES, theta=30 * DEGREES)
         self.play(Create(axes), run_time = 1)
         self.play(Create(sphere), run_time = 1)
@@ -51,7 +57,10 @@ class abstraction2(ThreeDScene):
         self.play(Create(text1), run_time = 1)
         self.play(ReplacementTransform(text1,text2), run_time = 0.5)
         self.wait(1)
-
+        self.play(ReplacementTransform(text2, text3), run_time = 1)
+        self.add(img)
+        self.wait(5)
+     
 class eco1(Scene):
      def construct(self):
         eco = Text("II. Economic Trend")
