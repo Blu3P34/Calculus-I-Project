@@ -117,6 +117,85 @@ class eco1(Scene):
         self.wait(1)
         self.play(x.animate.set_value(7), run_time = 4)
         self.wait(1)
+
+class archi1(Scene):
+    def construct(self):
+        archi = Text("III. Architectures")
+         
+        self.play(Create(archi))
+        self.wait(1)
+
+class harmo1(Scene):
+    def construct(self):
+        text0 = Text("III. Sound processing")
+        texta = Text("Calculus")
+        textb = Text("Music")
+        textc = Text("Sound processing")
+        C = MathTex(r"C_4 = 262 Hz").shift(UP*3)
+        D = MathTex(r"D_4 = 294 Hz").shift(UP*2)
+        E = MathTex(r"E_4 = 330 Hz").shift(UP*1)
+        F = MathTex(r"F_4 = 349 Hz")
+        G = MathTex(r"G_4 = 342 Hz").shift(DOWN*1)
+        A = MathTex(r"A_4 = 440 Hz").shift(DOWN*2)
+        B = MathTex(r"B_4 = 494 Hz").shift(DOWN*3)
+        CM = MathTex(r"C\,major = C + G + E")
+        AM = MathTex(r"A\,major = A + C\# + E")
+        axes1 = Axes(x_range = [0,10,1], y_range = [-1,1,1], x_length = 10, y_length = 1, axis_config = {"include_tip": False})
+        axis_labels1 = axes1.get_axis_labels(x_label = "t", y_label = "x(t)")
+        graph1 = axes1.plot(lambda x : np.cos(2*x), x_range = [0,10], color = RED)
+        text1 = MathTex(r"f = 2f_0").next_to(axes1, RIGHT, buff = 0.5)
+        sound1 = VGroup(axes1, graph1, axis_labels1, text1).to_corner(UL, buff = 0.3)
+
+        axes2 = Axes(x_range = [0,10,1], y_range = [-1,1,1], x_length = 10, y_length = 1, axis_config = {"include_tip": False})
+        axis_labels2 = axes2.get_axis_labels(x_label = "t", y_label = "y(t)")
+        graph2 = axes2.plot(lambda x : np.cos(3*x), x_range = [0,10], color = RED)
+        text2 = MathTex(r"f = 3f_0").next_to(axes2, RIGHT, buff = 0.5)
+        sound2 = VGroup(axes2, graph2, axis_labels2, text2).next_to(sound1, DOWN, buff = 0.3)
+
+        axes3 = Axes(x_range = [0,10,1], y_range = [-2,2,1], x_length = 10, y_length = 2, axis_config = {"include_tip": False})
+        axis_labels3 = axes3.get_axis_labels(x_label = "t", y_label = "z(t)")
+        graph3 = axes3.plot(lambda x : np.cos(2*x) + np.cos(3*x), x_range = [0,10], color = RED)
+        text3 = MathTex(r"f = f_0").next_to(axes3, RIGHT, buff = 0.5)
+        sound3 = VGroup(axes3, graph3, axis_labels3, text3).next_to(sound2, DOWN, buff = 0.3)
+        
+        self.play(Create(text0), run_time = 1)
+        self.wait(1)
+        self.play(ReplacementTransform(text0,texta), run_time = 1)
+        self.play(Rotate(texta, PI/4), run_time = 1)
+        self.play(Rotate(texta, -PI/2), run_time = 1)
+        self.play(Rotate(texta, PI/4), run_time = 1)
+        self.play(Rotate(texta, PI/4), run_time = 1)
+        self.play(Rotate(texta, -PI/2), run_time = 1)
+        self.play(Rotate(texta, PI/4), run_time = 1)
+        self.play(Rotate(texta, PI/4), run_time = 1)
+        self.play(Rotate(texta, -PI/2), run_time = 1)
+        self.play(Rotate(texta, PI/4), run_time = 1)
+        self.play(ReplacementTransform(texta,textb), run_time = 1)
+        self.wait(1)
+        self.play(ReplacementTransform(textb,textc), run_time = 1)
+        self.play(FadeOut(textc), run_time = 1)
+        self.play(Write(C), run_time = 2)
+        self.play(Write(D), run_time = 2)
+        self.play(Write(E), run_time = 2)
+        self.play(Write(F), run_time = 2)
+        self.play(Write(G), run_time = 2)
+        self.play(Write(A), run_time = 2)
+        self.play(Write(B), run_time = 2)
+        self.play(FadeOut(A),FadeOut(B),FadeOut(C),FadeOut(D),FadeOut(F),FadeOut(G),FadeOut(E), run_time = 1)
+        self.play(Write(CM),run_time = 1)
+        self.wait()
+        self.play(ReplacementTransform(CM, AM), run_time = 1)
+        self.wait()
+        self.play(FadeOut(AM), run_time = 1)
+        self.play(DrawBorderThenFill(axes1), DrawBorderThenFill(axes2), DrawBorderThenFill(axes3), Write(axis_labels1),Write(axis_labels2),Write(axis_labels3))
+        self.play(Create(graph1),Create(graph2),Create(graph3),Write(text1),Write(text2),Write(text3))
+        self.wait(4)
+        self.play(FadeOut(sound1),FadeOut(sound2),FadeOut(sound3))
+
+        
+        
+
+
   
     
         
