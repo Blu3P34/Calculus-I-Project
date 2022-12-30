@@ -153,7 +153,7 @@ class harmo1(Scene):
         sound2 = VGroup(axes2, graph2, axis_labels2, text2).next_to(sound1, DOWN, buff = 0.3)
 
         axes3 = Axes(x_range = [0,10,1], y_range = [-2,2,1], x_length = 10, y_length = 2, axis_config = {"include_tip": False})
-        axis_labels3 = axes3.get_axis_labels(x_label = "t", y_label = "z(t)")
+        axis_labels3 = axes3.get_axis_labels(x_label = "t", y_label = "z(t) = x(t) + y(t)")
         graph3 = axes3.plot(lambda x : np.cos(2*x) + np.cos(3*x), x_range = [0,10], color = RED)
         text3 = MathTex(r"f = f_0").next_to(axes3, RIGHT, buff = 0.5)
         sound3 = VGroup(axes3, graph3, axis_labels3, text3).next_to(sound2, DOWN, buff = 0.3)
